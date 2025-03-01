@@ -15,7 +15,7 @@ describe('AuthService', () => {
   };
 
   const mockJwtService = {
-    sign: jest.fn(),
+    sign: jest.fn(() => 'test-token'),
   };
 
   beforeEach(async () => {
@@ -54,7 +54,7 @@ describe('AuthService', () => {
       };
 
       mockUsersService.findByEmail.mockResolvedValue(mockUser);
-      mockJwtService.sign.mockReturnValue('token');
+      mockJwtService.sign.mockReturnValue('test-token');
 
       const result = await service.login({
         email: 'test@test.com',
@@ -63,6 +63,7 @@ describe('AuthService', () => {
 
       expect(result).toHaveProperty('user');
       expect(result).toHaveProperty('token');
+      expect(result.token).toBe('test-token');
     });
   });
 }); 
