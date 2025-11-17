@@ -22,11 +22,10 @@ export class Job {
   @Column('decimal', { precision: 10, scale: 2 })
   budget: number;
 
-  @Column({
-    type: 'enum',
-    enum: JobStatus,
-    default: JobStatus.OPEN
-  })
+  // Use a text column for status so the schema works across SQLite and Postgres.
+  // Postgres enums are nicer, but SQLite doesn't support enum types — this keeps
+  // local development simple while preserving the TypeScript enum.
+  @Column({ type: 'text', default: JobStatus.OPEN })
   status: JobStatus;
 
   @ManyToOne(() => User, user => user.postedJobs)
