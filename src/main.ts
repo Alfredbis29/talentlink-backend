@@ -25,8 +25,10 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  // Start the server
-  await app.listen(3000);
-  console.log(`Application is running on: ${await app.getUrl()}`);
+  // Start the server listening on all interfaces so it's reachable via 127.0.0.1 and Docker/container hosts.
+  const port = 3000;
+  await app.listen(port, '0.0.0.0');
+  // getUrl may return an IPv6 loopback; print both common access URLs for clarity.
+  console.log(`Application is running on: http://localhost:${port} and ${await app.getUrl()}`);
 }
 bootstrap();
