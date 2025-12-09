@@ -20,11 +20,9 @@ export class User {
   @Column()
   password: string;
 
-  @Column({
-    type: 'enum',
-    enum: UserRole,
-    default: UserRole.FREELANCER
-  })
+  // Use text column instead of Postgres enum to support SQLite for local dev.
+  // TypeScript enum validation is preserved while allowing multiple DB backends.
+  @Column({ type: 'text', default: UserRole.FREELANCER })
   role: UserRole;
 
   @OneToMany(() => Job, job => job.client)
