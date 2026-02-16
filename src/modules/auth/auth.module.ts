@@ -18,7 +18,6 @@ import { JwtStrategy } from './strategies/jwt.strategy';
         const secret = configService.get<string>('JWT_SECRET') || 'dev_jwt_secret';
         const expiresIn = configService.get<string>('JWT_EXPIRATION', '1h');
         if (!configService.get<string>('JWT_SECRET')) {
-          // eslint-disable-next-line no-console
           console.warn('JWT_SECRET not set — using development fallback secret.');
         }
         return {
@@ -33,4 +32,4 @@ import { JwtStrategy } from './strategies/jwt.strategy';
   controllers: [AuthController],
   exports: [AuthService],
 })
-export class AuthModule {} 
+export class AuthModule {}

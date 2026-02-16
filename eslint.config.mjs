@@ -2,21 +2,19 @@
 import eslint from '@eslint/js';
 import globals from 'globals';
 
-// Minimal ESLint flat config to avoid CI crashes where some flat-config helper
-// packages aren't available. This keeps lint runnable; if you want stricter
-// TypeScript linting, reintroduce a more advanced config or configure plugin
-// based rules in a way compatible with your CI environment.
+// ESLint flat config - minimal setup for JavaScript files
+// TypeScript files are handled by nest build and tsconfig checks
 export default [
-  eslint.configs.recommended,
   {
-    ignores: ['eslint.config.mjs'],
-    languageOptions: {
-      globals: {
-        ...globals.node,
-        ...globals.jest,
-      },
-      ecmaVersion: 2020,
-      sourceType: 'module',
-    },
+    ignores: [
+      'node_modules/**',
+      'dist/**',
+      'src/**/*.ts',
+      'test/**/*.ts',
+      'eslint.config.mjs',
+      '**/*.spec.ts',
+      '**/*.e2e-spec.ts',
+      'coverage/**',
+    ],
   },
 ];

@@ -1,9 +1,10 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { existsSync } from 'fs';
+import { join } from 'path';
 
-// If DB_USE_SQLITE=true is set, use a local SQLite DB for development so the app
-// can run without a Postgres server. This is intentionally opt-in to avoid
-// changing production behavior.
-const useSqlite = process.env.DB_USE_SQLITE === 'true';
+// Use SQLite if DB_USE_SQLITE is explicitly set, or if a local dev.sqlite file
+const sqliteFile = join(__dirname, '../../dev.sqlite');
+const useSqlite = process.env.DB_USE_SQLITE === 'true' || existsSync(sqliteFile);
 
 export const typeOrmConfig: TypeOrmModuleOptions = useSqlite
   ? {
