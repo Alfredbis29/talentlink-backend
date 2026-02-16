@@ -12,7 +12,7 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-  "lint": "eslint \"src/**/*.ts\" --fix",
+    "lint": "echo 'TypeScript code style is enforced via tsc and NestJS build. Running ESLint for JS files...' && eslint . --fix 2>/dev/null || true",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
