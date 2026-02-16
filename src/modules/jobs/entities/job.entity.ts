@@ -23,8 +23,8 @@ export class Job {
   budget: number;
 
   // Use a text column for status so the schema works across SQLite and Postgres.
-  // Postgres enums are nicer, but SQLite doesn't support enum types — this keeps
-  // local development simple while preserving the TypeScript enum.
+  // Postgres enums are nicer, but SQLite doesn't support enum types —this keeps
+  // local development simple while preserving the TypeScript enum....
   @Column({ type: 'text', default: JobStatus.OPEN })
   status: JobStatus;
 
@@ -39,4 +39,7 @@ export class Job {
 
   @UpdateDateColumn()
   updatedAt: Date;
-} 
+
+  @Column('timestamp', { nullable: true })
+  completedAt: Date | null;
+}

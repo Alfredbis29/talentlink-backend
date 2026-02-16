@@ -3,8 +3,6 @@ import { existsSync } from 'fs';
 import { join } from 'path';
 
 // Use SQLite if DB_USE_SQLITE is explicitly set, or if a local dev.sqlite file
-// is present (convenience for local development). This prevents accidental
-// Postgres connection attempts when developers haven't set up a DB.
 const sqliteFile = join(__dirname, '../../dev.sqlite');
 const useSqlite = process.env.DB_USE_SQLITE === 'true' || existsSync(sqliteFile);
 
